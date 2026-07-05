@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.local-data/
+.vercel/
+node_modules/
+*.log
+Thumbs.db
+
+.tmp-site/
+.local-data/
+.vercel/
+node_modules/
+.env
+.env.local

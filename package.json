@@ -1,0 +1,9 @@
+{
+  "name": "hotel-or-haganuz-uman",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node .local-server.cjs",
+    "check": "node --check assets/js/main.js && node --check assets/js/admin.js && node --check api/_lib.js && node --check api/login.js && node --check api/logout.js && node --check api/session.js && node --check api/reservations.js && node --check api/reservations/[id].js"
+  }
+}

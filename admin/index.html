@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin | Hotel Or Haganuz Uman</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=23">
+  </head>
+  <body class="admin-page admin-platform">
+    <main class="admin-shell">
+      <section class="admin-login" id="adminLogin">
+        <div class="admin-login-card">
+          <p class="eyebrow">Hotel Or Haganuz Uman</p>
+          <h1>Panel privado</h1>
+          <p>Gestion de reservas, huespedes, habitaciones y operacion diaria.</p>
+          <form id="loginForm" class="admin-form">
+            <label>
+              Usuario
+              <input id="adminUser" type="text" autocomplete="username" required>
+            </label>
+            <label>
+              Clave
+              <input id="adminPassword" type="password" autocomplete="current-password" required>
+            </label>
+            <button class="button primary" type="submit">Entrar al panel</button>
+            <p class="admin-error" id="loginError" hidden>Usuario o clave incorrectos.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="hotel-admin" id="adminDashboard" hidden>
+        <aside class="admin-sidebar">
+          <a class="admin-brand" href="../" aria-label="Hotel Or Haganuz">
+            <img src="../assets/img/or-haganuz-logo-clean.png" alt="Or Haganuz">
+          </a>
+          <nav class="admin-nav" aria-label="Navegacion administrativa">
+            <button class="is-active" type="button" data-admin-view="dashboard">Resumen</button>
+            <button type="button" data-admin-view="reservations">Reservas</button>
+            <button type="button" data-admin-view="calendar">Calendario</button>
+            <button type="button" data-admin-view="rooms">Habitaciones</button>
+            <button type="button" data-admin-view="guests">Huespedes</button>
+            <button type="button" data-admin-view="operations">Operacion</button>
+          </nav>
+          <div class="admin-sidebar-footer">
+            <a href="../reservas/">Pagina de reservas</a>
+            <a href="../">Ver sitio publico</a>
+            <button id="logoutAdmin" type="button">Cerrar sesion</button>
+          </div>
+        </aside>
+
+        <div class="admin-workspace">
+          <header class="admin-commandbar">
+            <div>
+              <p class="eyebrow">Backoffice</p>
+              <h1 id="adminViewTitle">Resumen operativo</h1>
+            </div>
+            <div class="admin-command-actions">
+              <button class="button secondary" id="refreshAdmin" type="button">Actualizar</button>
+              <button class="button secondary" id="exportCsv" type="button">Exportar CSV</button>
+              <button class="button primary" id="newReservation" type="button">Nueva reserva</button>
+            </div>
+          </header>
+
+          <p class="backend-status" id="backendStatus" hidden></p>
+
+          <section class="admin-view is-active" id="view-dashboard" data-view-title="Resumen operativo">
+            <div class="admin-kpis">
+              <article><span id="statTotal">0</span><p>Reservas totales</p></article>
+              <article><span id="statConfirmed">0</span><p>Confirmadas</p></article>
+              <article><span id="statPending">0</span><p>Pendientes</p></article>
+              <article><span id="statUpcoming">0</span><p>Proximas llegadas</p></article>
+            </div>
+
+            <div class="admin-dashboard-grid">
+              <section class="admin-card">
+                <div class="admin-card-head">
+                  <div>
+                    <p class="eyebrow">Hoy</p>
+                    <h2>Movimiento del dia</h2>
+                  </div>
+                </div>
+                <div class="movement-grid">
+                  <div>
+                    <h3>Llegadas</h3>
+                    <div id="arrivalList" class="mini-list"></div>
+                  </div>
+                  <div>
+                    <h3>Salidas</h3>
+                    <div id="departureList" class="mini-list"></div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="admin-card">
+                <div class="admin-card-head">
+                  <div>
+                    <p class="eyebrow">Prioridad</p>
+                    <h2>Reservas pendientes</h2>
+                  </div>
+                </div>
+                <div id="pendingList" class="mini-list"></div>
+              </section>
+
+              <section class="admin-card admin-card-wide">
+                <div class="admin-card-head">
+                  <div>
+                    <p class="eyebrow">Disponibilidad</p>
+                    <h2>Habitaciones y ocupacion</h2>
+                  </div>
+                </div>
+                <div id="roomBoard" class="room-board"></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="admin-view" id="view-reservations" data-view-title="Reservas">
+            <div class="admin-toolbar">
+              <input class="admin-search" id="reservationSearch" type="search" placeholder="Buscar por nombre, telefono, email, estado o origen">
+              <select id="statusFilter">
+                <option value="">Todos los estados</option>
+                <option>Pendiente</option>
+                <option>Confirmada</option>
+                <option>Cancelada</option>
+                <option>Completada</option>
+              </select>
+              <select id="sourceFilter">
+                <option value="">Todos los origenes</option>
+                <option>Web</option>
+                <option>WhatsApp</option>
+                <option>Email</option>
+                <option>Manual</option>
+              </select>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Huesped</th>
+                    <th>Fechas</th>
+                    <th>Habitacion</th>
+                    <th>Origen</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="reservationTable"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="admin-view" id="view-calendar" data-view-title="Calendario">
+            <section class="admin-card">
+              <div class="admin-card-head">
+                <div>
+                  <p class="eyebrow">Calendario</p>
+                  <h2 id="calendarTitle">Mes</h2>
+                </div>
+                <div class="calendar-controls">
+                  <button type="button" id="prevMonth" aria-label="Mes anterior">‹</button>
+                  <button type="button" id="nextMonth" aria-label="Mes siguiente">›</button>
+                </div>
+              </div>
+              <div class="calendar-grid admin-calendar-grid" id="calendarGrid" aria-label="Calendario de reservas"></div>
+            </section>
+          </section>
+
+          <section class="admin-view" id="view-rooms" data-view-title="Habitaciones">
+            <div id="roomsGrid" class="rooms-grid"></div>
+          </section>
+
+          <section class="admin-view" id="view-guests" data-view-title="Huespedes">
+            <div id="guestDirectory" class="guest-directory"></div>
+          </section>
+
+          <section class="admin-view" id="view-operations" data-view-title="Operacion">
+            <div class="admin-dashboard-grid">
+              <section class="admin-card">
+                <div class="admin-card-head">
+                  <div>
+                    <p class="eyebrow">Check-in</p>
+                    <h2>Preparar llegadas</h2>
+                  </div>
+                </div>
+                <div id="operationArrivals" class="task-list"></div>
+              </section>
+              <section class="admin-card">
+                <div class="admin-card-head">
+                  <div>
+                    <p class="eyebrow">Housekeeping</p>
+                    <h2>Habitaciones por revisar</h2>
+                  </div>
+                </div>
+                <div id="operationRooms" class="task-list"></div>
+              </section>
+              <section class="admin-card admin-card-wide">
+                <div class="admin-card-head">
+                  <div>
+                    <p class="eyebrow">Importar</p>
+                    <h2>Cargar reserva desde WhatsApp o email</h2>
+                  </div>
+                </div>
+                <textarea class="message-import" id="messageImport" rows="7" placeholder="Pega aqui el mensaje recibido. Ejemplo: Nombre: David, Entrada: 2026-07-10, Salida: 2026-07-14, Huespedes: 4..."></textarea>
+                <button class="button secondary" id="importMessage" type="button">Cargar al formulario</button>
+              </section>
+            </div>
+          </section>
+        </div>
+
+        <aside class="reservation-editor" id="reservationEditor" aria-label="Editor de reserva">
+          <form class="admin-card admin-form" id="reservationForm">
+            <div class="admin-card-head">
+              <div>
+                <p class="eyebrow">Reserva</p>
+                <h2 id="formTitle">Nueva reserva</h2>
+              </div>
+              <button class="editor-close" id="closeEditor" type="button" aria-label="Cerrar">×</button>
+            </div>
+
+            <input id="reservationId" name="reservationId" type="hidden">
+
+            <label>
+              Nombre del huesped
+              <input id="guestName" name="guestName" type="text" required>
+            </label>
+
+            <div class="admin-two">
+              <label>
+                Telefono / WhatsApp
+                <input id="guestPhone" name="guestPhone" type="tel">
+              </label>
+              <label>
+                Email
+                <input id="guestEmail" name="guestEmail" type="email">
+              </label>
+            </div>
+
+            <div class="admin-two">
+              <label>
+                Entrada
+                <input id="adminCheckin" name="checkin" type="date" required>
+              </label>
+              <label>
+                Salida
+                <input id="adminCheckout" name="checkout" type="date" required>
+              </label>
+            </div>
+
+            <div class="admin-two">
+              <label>
+                Huespedes
+                <input id="adminGuests" name="guests" type="number" min="1" max="80" value="2" required>
+              </label>
+              <label>
+                Habitacion
+                <select id="adminRoomType" name="roomType">
+                  <option>Habitacion individual</option>
+                  <option>Habitacion doble</option>
+                  <option>Suite familiar</option>
+                  <option>Familia / grupo</option>
+                  <option>Por definir</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="admin-two">
+              <label>
+                Origen
+                <select id="adminSource" name="source">
+                  <option>Web</option>
+                  <option>WhatsApp</option>
+                  <option>Email</option>
+                  <option>Manual</option>
+                </select>
+              </label>
+              <label>
+                Estado
+                <select id="adminStatus" name="status">
+                  <option>Pendiente</option>
+                  <option>Confirmada</option>
+                  <option>Cancelada</option>
+                  <option>Completada</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              Notas internas
+              <textarea id="adminNotes" name="notes" rows="4" placeholder="Precio acordado, peticiones, comidas, hora de llegada, etc."></textarea>
+            </label>
+
+            <div class="editor-actions">
+              <button class="button secondary" id="resetForm" type="button">Limpiar</button>
+              <button class="button primary" type="submit">Guardar reserva</button>
+            </div>
+          </form>
+        </aside>
+      </section>
+    </main>
+
+    <script src="../assets/js/admin.js?v=4"></script>
+  </body>
+</html>

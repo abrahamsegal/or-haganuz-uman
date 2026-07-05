@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reservas | Hotel Or Haganuz Uman</title>
+    <meta name="description" content="Consulta disponibilidad y reservas para Hotel Or Haganuz Uman.">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=23">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="ניווט ראשי">
+        <a class="brand" href="../"><img src="../assets/img/or-haganuz-logo-clean.png" alt="Or Haganuz"></a>
+        <button class="menu-toggle" type="button" aria-label="פתח תפריט" aria-expanded="false"><span></span><span></span><span></span></button>
+        <div class="nav-links">
+          <a href="../" data-i18n="nav.home">ראשי</a>
+          <a href="../imagenes/" data-i18n="nav.gallery">גלריא</a>
+          <a href="../contactanos/" data-i18n="nav.form">שליחת טופס פנייה</a>
+          <a href="./" data-i18n="booking.nav">Reservas</a>
+        </div>
+        <div class="nav-tools">
+          <div class="language-switch" aria-label="Language selector">
+            <button type="button" data-lang="he" class="is-active">HE</button>
+            <button type="button" data-lang="es">ES</button>
+            <button type="button" data-lang="en">EN</button>
+          </div>
+          <a class="button secondary" href="https://wa.me/972538293228" target="_blank" rel="noopener" data-i18n="cta.reserve">הזמנה בוואטסאפ</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="booking-hero">
+        <div class="container booking-hero-inner">
+          <p class="eyebrow" data-i18n="booking.eyebrow">Reservas</p>
+          <h1 data-i18n="booking.title">Consulta disponibilidad</h1>
+          <p data-i18n="booking.copy">Elige fechas y envía la solicitud directo por WhatsApp. Confirmamos disponibilidad personalmente.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container booking-layout">
+          <form class="booking-widget" id="bookingForm">
+            <div class="booking-field">
+              <label for="guestName" data-i18n="booking.guestName">Nombre</label>
+              <input id="guestName" name="guestName" type="text" autocomplete="name" required>
+            </div>
+            <div class="booking-field">
+              <label for="guestPhone" data-i18n="booking.guestPhone">WhatsApp / telefono</label>
+              <input id="guestPhone" name="guestPhone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="booking-field booking-field--full">
+              <label for="guestEmail" data-i18n="booking.guestEmail">Email opcional</label>
+              <input id="guestEmail" name="guestEmail" type="email" autocomplete="email">
+            </div>
+            <div class="booking-field">
+              <label for="checkin" data-i18n="booking.checkin">Entrada</label>
+              <input id="checkin" name="checkin" type="date" required>
+            </div>
+            <div class="booking-field">
+              <label for="checkout" data-i18n="booking.checkout">Salida</label>
+              <input id="checkout" name="checkout" type="date" required>
+            </div>
+            <div class="booking-field">
+              <label for="guests" data-i18n="booking.guests">Huéspedes</label>
+              <input id="guests" name="guests" type="number" min="1" max="30" value="2" required>
+            </div>
+            <div class="booking-field">
+              <label for="roomType" data-i18n="booking.roomType">Tipo de habitación</label>
+              <select id="roomType" name="roomType">
+                <option value="Habitación individual" data-i18n="booking.single">Habitación individual</option>
+                <option value="Habitación doble" data-i18n="booking.double">Habitación doble</option>
+                <option value="Familia / grupo" data-i18n="booking.family">Familia / grupo</option>
+              </select>
+            </div>
+            <div class="booking-field booking-field--full">
+              <label for="notes" data-i18n="booking.notes">Notas</label>
+              <textarea id="notes" name="notes" rows="4" data-i18n-placeholder="booking.notesPlaceholder" placeholder="Fechas especiales, grupo, comidas, etc."></textarea>
+            </div>
+            <div class="terms-box booking-field--full">
+              <label class="terms-check" for="termsAccept">
+                <input id="termsAccept" name="termsAccept" type="checkbox" required>
+                <span data-i18n="booking.termsAccept">Acepto los terminos y condiciones de reserva.</span>
+              </label>
+              <p data-i18n="booking.termsCopy">El hotel se reserva el derecho de cancelar, modificar o rechazar cualquier solicitud o reserva en cualquier momento y a su sola discrecion. La solicitud no garantiza disponibilidad, precio ni habitacion hasta recibir confirmacion escrita del hotel.</p>
+            </div>
+            <div class="booking-actions booking-field--full">
+              <button class="button primary booking-submit" type="submit" data-i18n="booking.submit">Reservar directo</button>
+              <button class="button secondary booking-email" id="bookingEmail" type="button" data-i18n="booking.emailSubmit">Enviar por email</button>
+            </div>
+            <p class="booking-status booking-field--full" id="bookingStatus" hidden></p>
+          </form>
+
+          <aside class="booking-summary">
+            <h2 data-i18n="booking.summaryTitle">Reserva directa</h2>
+            <p data-i18n="booking.summaryCopy">Este formulario no cobra ni confirma automáticamente. Envía una solicitud clara al hotel para confirmar disponibilidad y precio.</p>
+            <ul>
+              <li data-i18n="booking.point1">Respuesta directa por WhatsApp</li>
+              <li data-i18n="booking.point2">Ideal para familias y grupos</li>
+              <li data-i18n="booking.point3">Ubicación: Bilansky 2, Uman</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <a class="floating-whatsapp" href="https://wa.me/972538293228" target="_blank" rel="noopener" aria-label="WhatsApp"></a>
+    <script src="../assets/js/main.js?v=23"></script>
+  </body>
+</html>
