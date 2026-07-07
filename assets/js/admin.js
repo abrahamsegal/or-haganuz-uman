@@ -704,17 +704,27 @@ function translateSelectOptions() {
 }
 
 async function api(path, options = {}) {
-  const response = await fetch(path, {
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {}),
-    },
-    ...options,
-  });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.error || "Error del servidor");
-  return data;
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), options.timeout || 12000);
+  try {
+    const response = await fetch(path, {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        ...(options.headers || {}),
+      },
+      signal: controller.signal,
+      ...options,
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || "Error del servidor");
+    return data;
+  } catch (error) {
+    if (error.name === "AbortError") throw new Error(text("serverError"));
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
 }
 
 function showDashboard() {
@@ -1095,13 +1105,14 @@ async function loadAdminUsers() {
 
 async function initializeDashboard() {
   showDashboard();
-  try {
-    await loadHotelSettings();
-    await loadReservations();
-    await loadAdminUsers();
-  } catch (error) {
-    setBackendStatus(error.message || text("serverError"), "error");
-  }
+  setBackendStatus(text("loadingReservations"));
+  const results = await Promise.allSettled([
+    loadHotelSettings(),
+    loadReservations(),
+    loadAdminUsers(),
+  ]);
+  const failed = results.find((result) => result.status === "rejected");
+  if (failed) setBackendStatus(failed.reason?.message || text("serverError"), "error");
 }
 
 function currentReservations() {
@@ -1860,7 +1871,7 @@ loginForm.addEventListener("submit", async (event) => {
       }),
     });
     currentUser = login.user;
-    await initializeDashboard();
+    initializeDashboard();
   } catch (error) {
     if (loginView.hidden) {
       setBackendStatus(error.message || text("serverError"), "error");
