@@ -3373,6 +3373,64 @@ body:not(.admin-page) .booking-hero p {
   gap: 10px;
 }
 
+.admin-platform .catalog-image-field {
+  display: grid;
+  grid-template-columns: 180px minmax(220px, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.admin-platform .catalog-image-preview {
+  width: 180px;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--admin-muted);
+  background: #efe5d5;
+  border: 1px solid #d7c8b4;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.admin-platform .catalog-image-preview img,
+.admin-platform .room-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-platform .catalog-upload-button {
+  min-height: 48px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 16px;
+  color: #fff;
+  background: var(--admin-ink);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.admin-platform .catalog-upload-button input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.admin-platform .room-card-image {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  margin: -2px -2px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--admin-line);
+}
+
 .admin-platform .admin-table {
   min-width: 980px;
 }
@@ -3447,6 +3505,7 @@ body:not(.admin-page) .booking-hero p {
   .admin-platform .admin-kpis,
   .admin-platform .admin-dashboard-grid,
   .admin-platform .catalog-mini-grid,
+  .admin-platform .catalog-image-field,
   .admin-platform .room-board,
   .admin-platform .rooms-grid,
   .admin-platform .guest-directory {

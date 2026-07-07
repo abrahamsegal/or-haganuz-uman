@@ -326,6 +326,14 @@ function cleanCatalogText(value) {
   return String(value || "").trim().slice(0, 600);
 }
 
+function cleanCatalogImage(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  if (raw.startsWith("data:image/")) return raw.slice(0, 900000);
+  if (/^https?:\/\//i.test(raw) || raw.startsWith("/assets/") || raw.startsWith("assets/")) return raw.slice(0, 1200);
+  return "";
+}
+
 function moneyValue(value) {
   if (value === "" || value === null || value === undefined) return null;
   const number = Number(value);
@@ -339,6 +347,7 @@ function normalizeRoom(item = {}) {
     capacity: Math.max(1, Number(item.capacity || 1)),
     count: Math.max(0, Number(item.count || 0)),
     price: cleanCatalogText(item.price),
+    imageUrl: cleanCatalogImage(item.imageUrl || item.image_url),
     active: item.active !== false,
     description: cleanCatalogText(item.description),
   };

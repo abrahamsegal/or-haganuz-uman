@@ -923,6 +923,7 @@ function normalizeClientSettings(settings = {}) {
       capacity: Math.max(1, Number(room.capacity || 1)),
       count: Math.max(0, Number(room.count || 0)),
       price: String(room.price || "").trim(),
+      imageUrl: String(room.imageUrl || room.image_url || "").trim(),
       active: room.active !== false,
       description: String(room.description || "").trim(),
     })),
@@ -965,7 +966,19 @@ function syncRoomTypeOptions(selectedValue = "") {
 function renderCatalogItem(group, item) {
   const active = item.active !== false ? "checked" : "";
   const removeLabel = group === "rooms" ? text("delete") : group === "meals" ? text("delete") : text("delete");
+  const imageUrl = group === "rooms" ? String(item.imageUrl || "").trim() : "";
   const extraFields = group === "rooms" ? `
+    <div class="catalog-image-field">
+      <div class="catalog-image-preview" data-image-preview>
+        ${imageUrl ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.name)}">` : `<span>Imagen del cuarto</span>`}
+      </div>
+      <label>Imagen URL
+        <input type="url" data-field="imageUrl" value="${escapeHtml(imageUrl)}" placeholder="https://... o subir archivo">
+      </label>
+      <label class="catalog-upload-button">Subir imagen
+        <input type="file" accept="image/*" data-image-upload>
+      </label>
+    </div>
     <div class="catalog-mini-grid">
       <label>${text("rooms")}
         <input type="number" min="0" data-field="count" value="${escapeHtml(item.count)}">
@@ -1039,6 +1052,7 @@ function readCatalogGroup(group) {
         count: Number(field("count")?.value || 0),
         capacity: Number(field("capacity")?.value || 1),
         price: field("price")?.value.trim() || "",
+        imageUrl: field("imageUrl")?.value.trim() || "",
       };
     }
     if (group === "meals") {
@@ -1064,9 +1078,43 @@ function readCatalogFromForm() {
   });
 }
 
+function compressImageFile(file, maxSize = 1400, quality = 0.78) {
+  return new Promise((resolve, reject) => {
+    if (!file || !file.type.startsWith("image/")) {
+      reject(new Error("Archivo de imagen no valido."));
+      return;
+    }
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("No se pudo leer la imagen."));
+    reader.onload = () => {
+      const image = new Image();
+      image.onerror = () => reject(new Error("No se pudo cargar la imagen."));
+      image.onload = () => {
+        const scale = Math.min(1, maxSize / Math.max(image.width, image.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      image.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function updateRoomImagePreview(node, imageUrl) {
+  const preview = node.querySelector("[data-image-preview]");
+  if (!preview) return;
+  preview.innerHTML = imageUrl
+    ? `<img src="${escapeHtml(imageUrl)}" alt="">`
+    : `<span>Imagen del cuarto</span>`;
+}
+
 function addCatalogItem(group) {
   const next = group === "rooms"
-    ? { id: makeClientId("room"), name: "Nueva habitacion", capacity: 2, count: 1, price: "", active: true, description: "" }
+    ? { id: makeClientId("room"), name: "Nueva habitacion", capacity: 2, count: 1, price: "", imageUrl: "", active: true, description: "" }
     : group === "meals"
       ? { id: makeClientId("meal"), name: "Nueva comida", type: "Desayuno", price: "", active: true, description: "" }
       : { id: makeClientId("service"), name: "Nuevo servicio", category: "Servicio", price: "", active: true, description: "" };
@@ -1673,6 +1721,7 @@ function renderRooms() {
     const available = Math.max(0, room.count - occupied.length);
     return `
       <article class="room-card">
+        ${room.imageUrl ? `<img class="room-card-image" src="${escapeHtml(room.imageUrl)}" alt="${escapeHtml(room.name)}">` : ""}
         <div class="room-card-top">
           <div>
             <p class="eyebrow">${available > 0 ? text("available") : text("full")}</p>
@@ -1961,6 +2010,30 @@ if (resetCatalogButton) {
 }
 
 if (catalogForm) {
+  catalogForm.addEventListener("change", async (event) => {
+    const itemNode = event.target.closest("[data-catalog-item='rooms']");
+    if (!itemNode) return;
+    if (event.target.matches("[data-field='imageUrl']")) {
+      updateRoomImagePreview(itemNode, event.target.value.trim());
+      return;
+    }
+    if (!event.target.matches("[data-image-upload]")) return;
+    const file = event.target.files?.[0];
+    if (!file) return;
+    try {
+      setBackendStatus("Procesando imagen...");
+      const imageUrl = await compressImageFile(file);
+      const input = itemNode.querySelector("[data-field='imageUrl']");
+      if (input) input.value = imageUrl;
+      updateRoomImagePreview(itemNode, imageUrl);
+      setBackendStatus("Imagen lista. Guarda el catalogo para publicarla.");
+    } catch (error) {
+      setBackendStatus(error.message || text("serverError"), "error");
+    } finally {
+      event.target.value = "";
+    }
+  });
+
   catalogForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!catalogForm.reportValidity()) return;
