@@ -510,12 +510,101 @@ if (bookingForm) {
   const emailButton = bookingForm.querySelector("#bookingEmail");
   const roomTypeSelect = bookingForm.querySelector("#roomType");
   const today = new Date().toISOString().slice(0, 10);
-  checkin.min = today;
-  checkout.min = today;
+  let bookingPickerTarget = checkin;
+  let bookingPickerDate = new Date();
+  const bookingPicker = document.createElement("div");
+  bookingPicker.className = "booking-date-picker";
+  bookingPicker.hidden = true;
+  bookingForm.appendChild(bookingPicker);
 
-  checkin.addEventListener("change", () => {
-    checkout.min = checkin.value || today;
-    if (checkout.value && checkout.value <= checkin.value) checkout.value = "";
+  function dateOnly(value) {
+    const [year, month, day] = String(value || today).split("-").map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  function toIsoDate(date) {
+    const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+  }
+
+  function addDays(date, days) {
+    const next = new Date(date);
+    next.setDate(next.getDate() + days);
+    return next;
+  }
+
+  function calendarLocale() {
+    const lang = localStorage.getItem("orHaganuzLang") || "he";
+    if (lang === "he") return "he-IL";
+    if (lang === "en") return "en-US";
+    return "es-ES";
+  }
+
+  function renderBookingPicker() {
+    const locale = calendarLocale();
+    const monthStart = new Date(bookingPickerDate.getFullYear(), bookingPickerDate.getMonth(), 1);
+    const firstOffset = (monthStart.getDay() + 6) % 7;
+    const gridStart = addDays(monthStart, -firstOffset);
+    const minDate = bookingPickerTarget === checkout && checkin.value ? addDays(dateOnly(checkin.value), 1) : dateOnly(today);
+    const monthTitle = new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(monthStart);
+    const weekdays = Array.from({ length: 7 }, (_, index) => {
+      const sample = addDays(new Date(2026, 0, 5), index);
+      return new Intl.DateTimeFormat(locale, { weekday: "short" }).format(sample);
+    });
+    const cells = Array.from({ length: 42 }, (_, index) => {
+      const date = addDays(gridStart, index);
+      const iso = toIsoDate(date);
+      const disabled = date < minDate;
+      const selected = iso === bookingPickerTarget.value;
+      const muted = date.getMonth() !== monthStart.getMonth();
+      return `<button type="button" class="${selected ? "is-selected" : ""} ${muted ? "is-muted" : ""}" data-booking-date="${iso}" ${disabled ? "disabled" : ""}>${date.getDate()}</button>`;
+    }).join("");
+
+    bookingPicker.innerHTML = `
+      <div class="booking-date-picker-head">
+        <button type="button" data-booking-month="-1">‹</button>
+        <strong>${monthTitle}</strong>
+        <button type="button" data-booking-month="1">›</button>
+      </div>
+      <div class="booking-date-weekdays">${weekdays.map((day) => `<span>${day}</span>`).join("")}</div>
+      <div class="booking-date-grid">${cells}</div>
+    `;
+  }
+
+  function openBookingPicker(input) {
+    bookingPickerTarget = input;
+    bookingPickerDate = input.value ? dateOnly(input.value) : new Date();
+    const field = input.closest(".booking-field");
+    field.after(bookingPicker);
+    bookingPicker.hidden = false;
+    renderBookingPicker();
+  }
+
+  [checkin, checkout].forEach((input) => {
+    input.addEventListener("click", () => openBookingPicker(input));
+    input.addEventListener("focus", () => openBookingPicker(input));
+  });
+
+  bookingPicker.addEventListener("click", (event) => {
+    const monthButton = event.target.closest("[data-booking-month]");
+    if (monthButton) {
+      bookingPickerDate.setMonth(bookingPickerDate.getMonth() + Number(monthButton.dataset.bookingMonth));
+      renderBookingPicker();
+      return;
+    }
+    const dateButton = event.target.closest("[data-booking-date]");
+    if (!dateButton || dateButton.disabled) return;
+    bookingPickerTarget.value = dateButton.dataset.bookingDate;
+    if (bookingPickerTarget === checkin && (!checkout.value || checkout.value <= checkin.value)) {
+      checkout.value = toIsoDate(addDays(dateOnly(checkin.value), 1));
+    }
+    bookingPicker.hidden = true;
+  });
+
+  document.addEventListener("click", (event) => {
+    if (bookingPicker.hidden) return;
+    if (bookingPicker.contains(event.target) || event.target === checkin || event.target === checkout) return;
+    bookingPicker.hidden = true;
   });
 
   async function loadBookingCatalog() {

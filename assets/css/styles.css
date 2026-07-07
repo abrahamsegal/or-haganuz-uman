@@ -1615,6 +1615,82 @@ p {
   font: inherit;
 }
 
+.booking-field input[readonly] {
+  cursor: pointer;
+}
+
+.booking-date-picker {
+  grid-column: 1 / -1;
+  padding: 16px;
+  background: #fffdf8;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 38px rgba(32, 34, 23, 0.12);
+}
+
+.booking-date-picker-head {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: var(--charcoal);
+  text-align: center;
+}
+
+.booking-date-picker-head button {
+  min-height: 38px;
+  color: var(--charcoal);
+  background: #f2eadf;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.booking-date-weekdays,
+.booking-date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.booking-date-weekdays {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.booking-date-grid button {
+  aspect-ratio: 1;
+  min-height: 38px;
+  color: var(--charcoal);
+  background: #f8f2e9;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.booking-date-grid button:hover:not(:disabled),
+.booking-date-grid button.is-selected {
+  color: #fff;
+  background: var(--charcoal);
+}
+
+.booking-date-grid button.is-muted {
+  opacity: 0.45;
+}
+
+.booking-date-grid button:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
 .booking-field textarea {
   resize: vertical;
 }
