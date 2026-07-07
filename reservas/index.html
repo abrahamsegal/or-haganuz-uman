@@ -80,7 +80,10 @@
             <div class="terms-box booking-field--full">
               <label class="terms-check" for="termsAccept">
                 <input id="termsAccept" name="termsAccept" type="checkbox" required>
-                <span>Acepto los <a href="../terminos/" target="_blank" rel="noopener">Términos y Condiciones</a>.</span>
+                <span>
+                  <span data-i18n="booking.termsPrefix">Acepto los</span>
+                  <a href="../terminos/" target="_blank" rel="noopener" data-i18n="booking.termsLink">Términos y Condiciones</a><span data-i18n="booking.termsSuffix">.</span>
+                </span>
               </label>
               <p data-i18n="booking.termsCopy">La solicitud queda sujeta a disponibilidad, pago cuando aplique y confirmación escrita del hotel.</p>
             </div>
@@ -105,6 +108,6 @@
     </main>
 
     <a class="floating-whatsapp" href="https://wa.me/972538293228" target="_blank" rel="noopener" aria-label="WhatsApp"></a>
-    <script src="../assets/js/main.js?v=25"></script>
+    <script src="../assets/js/main.js?v=26"></script>
   </body>
 </html>
