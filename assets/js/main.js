@@ -159,6 +159,7 @@ const translations = {
     "booking.termsLink": "התנאים וההגבלות",
     "booking.termsSuffix": ".",
     "booking.termsCopy": "הבקשה כפופה לזמינות, לתשלום כאשר נדרש, ולאישור כתוב מהמלון.",
+    "booking.dateRequired": "בחרו תאריך כניסה ותאריך יציאה.",
     "booking.summaryTitle": "הזמנה ישירה",
     "booking.summaryCopy": "הטופס אינו מחייב תשלום ואינו מאשר אוטומטית. הוא שולח בקשה ברורה למלון לאישור זמינות ומחיר",
     "booking.point1": "מענה ישיר בוואטסאפ",
@@ -294,6 +295,7 @@ const translations = {
     "booking.termsLink": "Términos y Condiciones",
     "booking.termsSuffix": ".",
     "booking.termsCopy": "La solicitud queda sujeta a disponibilidad, pago cuando aplique y confirmación escrita del hotel.",
+    "booking.dateRequired": "Selecciona fecha de entrada y salida.",
     "booking.summaryTitle": "Reserva directa",
     "booking.summaryCopy": "Este formulario no cobra ni confirma automáticamente. Envía una solicitud clara al hotel para confirmar disponibilidad y precio.",
     "booking.point1": "Respuesta directa por WhatsApp",
@@ -429,6 +431,7 @@ const translations = {
     "booking.termsLink": "Terms and Conditions",
     "booking.termsSuffix": ".",
     "booking.termsCopy": "The request is subject to availability, payment when applicable, and written confirmation from the hotel.",
+    "booking.dateRequired": "Select check-in and check-out dates.",
     "booking.summaryTitle": "Direct booking",
     "booking.summaryCopy": "This form does not charge or confirm automatically. It sends a clear request to the hotel to confirm availability and price.",
     "booking.point1": "Direct WhatsApp reply",
@@ -488,6 +491,7 @@ function setLanguage(lang) {
   });
 
   localStorage.setItem("orHaganuzLang", lang);
+  if (window.refreshBookingCalendar) window.refreshBookingCalendar();
 }
 
 languageButtons.forEach((button) => {
@@ -509,14 +513,13 @@ if (bookingForm) {
   const checkout = bookingForm.querySelector("#checkout");
   const emailButton = bookingForm.querySelector("#bookingEmail");
   const roomTypeSelect = bookingForm.querySelector("#roomType");
-  const sideCalendar = document.querySelector("#bookingSideCalendar");
+  const dateTrigger = bookingForm.querySelector("#bookingDateTrigger");
+  const checkinText = bookingForm.querySelector("#bookingCheckinText");
+  const checkoutText = bookingForm.querySelector("#bookingCheckoutText");
+  const bookingPicker = bookingForm.querySelector("#bookingInlineCalendar");
   const today = new Date().toISOString().slice(0, 10);
   let bookingPickerTarget = checkin;
   let bookingPickerDate = new Date();
-  const bookingPicker = sideCalendar || document.createElement("div");
-  bookingPicker.className = "booking-date-picker";
-  bookingPicker.hidden = false;
-  if (!sideCalendar) bookingForm.appendChild(bookingPicker);
 
   function dateOnly(value) {
     const [year, month, day] = String(value || today).split("-").map(Number);
@@ -539,6 +542,19 @@ if (bookingForm) {
     if (lang === "he") return "he-IL";
     if (lang === "en") return "en-US";
     return "es-ES";
+  }
+
+  function formatShortDate(value) {
+    if (!value) {
+      const lang = localStorage.getItem("orHaganuzLang") || "he";
+      return lang === "en" ? "Select" : lang === "he" ? "בחרו" : "Seleccionar";
+    }
+    return new Intl.DateTimeFormat(calendarLocale(), { day: "numeric", month: "short" }).format(dateOnly(value));
+  }
+
+  function updateDateTrigger() {
+    if (checkinText) checkinText.textContent = formatShortDate(checkin.value);
+    if (checkoutText) checkoutText.textContent = formatShortDate(checkout.value);
   }
 
   function renderBookingPicker() {
@@ -581,21 +597,43 @@ if (bookingForm) {
       </div>
       <div class="booking-date-weekdays">${weekdays.map((day) => `<span>${day}</span>`).join("")}</div>
       <div class="booking-date-grid">${cells}</div>
+      <button class="booking-date-done" type="button" data-booking-done>Listo</button>
     `;
+    updateDateTrigger();
   }
 
-  function openBookingPicker(input) {
+  function openBookingPicker(input = bookingPickerTarget) {
     bookingPickerTarget = input;
     bookingPickerDate = input.value ? dateOnly(input.value) : new Date();
+    bookingPicker.hidden = false;
+    if (dateTrigger) dateTrigger.setAttribute("aria-expanded", "true");
     renderBookingPicker();
   }
 
-  [checkin, checkout].forEach((input) => {
-    input.addEventListener("click", () => openBookingPicker(input));
-    input.addEventListener("focus", () => openBookingPicker(input));
+  function closeBookingPicker() {
+    bookingPicker.hidden = true;
+    if (dateTrigger) dateTrigger.setAttribute("aria-expanded", "false");
+  }
+
+  if (dateTrigger) {
+    dateTrigger.addEventListener("click", () => {
+      if (bookingPicker.hidden) openBookingPicker(bookingPickerTarget);
+      else closeBookingPicker();
+    });
+  }
+
+  bookingForm.querySelectorAll("[data-range-target]").forEach((button) => {
+    button.addEventListener("click", () => {
+      bookingPickerTarget = button.dataset.rangeTarget === "checkout" ? checkout : checkin;
+      renderBookingPicker();
+    });
   });
 
   bookingPicker.addEventListener("click", (event) => {
+    if (event.target.closest("[data-booking-done]")) {
+      closeBookingPicker();
+      return;
+    }
     const monthButton = event.target.closest("[data-booking-month]");
     if (monthButton) {
       bookingPickerDate.setMonth(bookingPickerDate.getMonth() + Number(monthButton.dataset.bookingMonth));
@@ -616,10 +654,22 @@ if (bookingForm) {
       bookingPickerTarget = checkout;
     } else if (bookingPickerTarget === checkout) {
       bookingPickerTarget = checkin;
+      closeBookingPicker();
     }
     renderBookingPicker();
   });
-  renderBookingPicker();
+
+  document.addEventListener("click", (event) => {
+    if (bookingPicker.hidden) return;
+    if (bookingPicker.contains(event.target) || dateTrigger?.contains(event.target)) return;
+    closeBookingPicker();
+  });
+
+  window.refreshBookingCalendar = () => {
+    updateDateTrigger();
+    if (!bookingPicker.hidden) renderBookingPicker();
+  };
+  updateDateTrigger();
 
   async function loadBookingCatalog() {
     if (!roomTypeSelect) return;
@@ -677,6 +727,12 @@ if (bookingForm) {
 
   bookingForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (!checkin.value || !checkout.value) {
+      const dictionary = translations[localStorage.getItem("orHaganuzLang") || "he"] || translations.he;
+      openBookingPicker(!checkin.value ? checkin : checkout);
+      showBookingStatus(dictionary["booking.dateRequired"], "error");
+      return;
+    }
     if (!bookingForm.reportValidity()) return;
     const lang = localStorage.getItem("orHaganuzLang") || "he";
     const dictionary = translations[lang] || translations.he;
@@ -690,7 +746,7 @@ if (bookingForm) {
       if (!response.ok) throw new Error(data.error || "Error");
       showBookingStatus(dictionary["booking.saved"], "success");
       bookingForm.reset();
-      checkout.min = today;
+      updateDateTrigger();
     } catch {
       showBookingStatus(dictionary["booking.apiError"], "error");
     }
@@ -698,6 +754,12 @@ if (bookingForm) {
 
   if (emailButton) {
     emailButton.addEventListener("click", () => {
+      if (!checkin.value || !checkout.value) {
+        const dictionary = translations[localStorage.getItem("orHaganuzLang") || "he"] || translations.he;
+        openBookingPicker(!checkin.value ? checkin : checkout);
+        showBookingStatus(dictionary["booking.dateRequired"], "error");
+        return;
+      }
       if (!bookingForm.reportValidity()) return;
       const subject = "Solicitud de reserva - Hotel Or Haganuz Uman";
       const message = buildBookingMessage();
