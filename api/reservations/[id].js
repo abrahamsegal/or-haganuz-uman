@@ -1,7 +1,8 @@
-const { json, readBody, requireAdmin, reservationFromBody, supabase, validateReservation } = require("../_lib");
+const { json, readBody, requireAdmin, requireFullAccess, reservationFromBody, supabase, validateReservation } = require("../_lib");
 
 module.exports = async function handler(req, res) {
-  if (!requireAdmin(req, res)) return;
+  const session = req.method === "DELETE" ? requireFullAccess(req, res) : requireAdmin(req, res);
+  if (!session) return;
 
   const id = req.query.id;
   if (!id) return json(res, 400, { error: "Falta ID" });

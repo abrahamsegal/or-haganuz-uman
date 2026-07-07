@@ -9,6 +9,8 @@ const apiRoutes = {
   "/api/logout": require("./api/logout"),
   "/api/session": require("./api/session"),
   "/api/reservations": require("./api/reservations"),
+  "/api/admin-users": require("./api/admin-users"),
+  "/api/hotel-settings": require("./api/hotel-settings"),
 };
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -49,6 +51,12 @@ const server = http.createServer((req, res) => {
   if (cleanPath.startsWith("/api/reservations/")) {
     req.query = { id: cleanPath.replace("/api/reservations/", "") };
     require("./api/reservations/[id]")(req, res);
+    return;
+  }
+
+  if (cleanPath.startsWith("/api/admin-users/")) {
+    req.query = { id: cleanPath.replace("/api/admin-users/", "") };
+    require("./api/admin-users/[id]")(req, res);
     return;
   }
 

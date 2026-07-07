@@ -239,3 +239,8 @@ Para usar Git correctamente, trabajar desde la carpeta del proyecto:
 ```bash
 cd C:\IA\hotel-uman
 git status
+```
+
+## Prioridad máxima
+
+El objetivo principal es que Hotel Or HaGanuz Uman tenga un sitio web profesional, confiable, rápido, responsive y fácil de editar, sin depender del Website Builder de Hostinger.

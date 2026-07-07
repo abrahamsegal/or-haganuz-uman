@@ -502,6 +502,7 @@ if (bookingForm) {
   const checkin = bookingForm.querySelector("#checkin");
   const checkout = bookingForm.querySelector("#checkout");
   const emailButton = bookingForm.querySelector("#bookingEmail");
+  const roomTypeSelect = bookingForm.querySelector("#roomType");
   const today = new Date().toISOString().slice(0, 10);
   checkin.min = today;
   checkout.min = today;
@@ -510,6 +511,22 @@ if (bookingForm) {
     checkout.min = checkin.value || today;
     if (checkout.value && checkout.value <= checkin.value) checkout.value = "";
   });
+
+  async function loadBookingCatalog() {
+    if (!roomTypeSelect) return;
+    try {
+      const response = await fetch("/api/hotel-settings");
+      if (!response.ok) return;
+      const data = await response.json();
+      const rooms = (data.settings?.rooms || []).filter((room) => room.active !== false && room.name);
+      if (!rooms.length) return;
+      roomTypeSelect.replaceChildren(...rooms.map((room) => new Option(room.name, room.name)));
+    } catch {
+      // Keep the static fallback options when the API is not available.
+    }
+  }
+
+  loadBookingCatalog();
 
   function buildBookingMessage() {
     const data = new FormData(bookingForm);

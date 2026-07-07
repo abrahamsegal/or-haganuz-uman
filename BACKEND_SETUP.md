@@ -27,12 +27,17 @@ La `service role key` va solo en Vercel como variable de entorno. Nunca va en HT
 Configurar estas variables:
 
 ```text
+OWNER_ADMIN_USER=owner
+OWNER_ADMIN_PASSWORD=una-clave-fuerte
+OWNER_ADMIN_NAME=Nombre del dueno
+ADMIN_USER=owner
 ADMIN_PASSWORD=una-clave-fuerte
-ADMIN_USER=admin
 ADMIN_SESSION_SECRET=un-secreto-largo-random
 SUPABASE_URL=https://tu-proyecto.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=tu-service-role-key
 ```
+
+`OWNER_ADMIN_USER` y `OWNER_ADMIN_PASSWORD` son el acceso principal. Ese usuario no vive en la base de datos y no se puede borrar desde `/admin/`. Para cambiarlo hay que cambiar las variables privadas del servidor.
 
 ## Flujo
 
@@ -40,12 +45,17 @@ SUPABASE_SERVICE_ROLE_KEY=tu-service-role-key
 - La reserva se guarda en Supabase con estado `Pendiente`.
 - El hotel entra a `/admin/`.
 - El admin ve calendario, confirma, cancela, edita o agrega reservas manuales de WhatsApp/email.
+- Cada reserva puede guardar moneda, costo total, anticipo y estado de pago.
+- El admin con acceso completo puede editar el catalogo del hotel: tipos de habitacion, desayunos/comidas, servicios y costos/notas de precio.
+- El dueno principal puede crear usuarios secundarios con acceso completo o limitado.
+- Acceso completo: puede gestionar reservas y exportar.
+- Acceso limitado: puede trabajar reservas, pero no borrar reservas, exportar CSV ni administrar usuarios.
 
 ## Local
 
 El servidor local de este proyecto (`node .local-server.cjs`) tambien atiende `/api` y usa `.env.local`.
 
-La base local vive en `.local-data/` y no se sube al deploy.
+La base local vive en `.local-data/` y no se sube al deploy. Ahi se guardan reservas, usuarios secundarios y catalogo editable cuando trabajas sin Supabase.
 
 ## Nota de seguridad
 
