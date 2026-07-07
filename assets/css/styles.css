@@ -1652,6 +1652,61 @@ p {
   line-height: 1.6;
 }
 
+.terms-check a {
+  color: var(--charcoal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-hero {
+  padding: 150px 0 54px;
+  background: linear-gradient(180deg, rgba(247, 241, 232, 0.96), rgba(235, 225, 211, 0.9));
+}
+
+.legal-hero h1 {
+  max-width: 900px;
+  margin: 0 0 16px;
+  color: var(--charcoal);
+  font-size: clamp(2.4rem, 6vw, 5.4rem);
+  line-height: 0.95;
+}
+
+.legal-hero p:not(.eyebrow) {
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.legal-document {
+  max-width: 900px;
+  padding: 34px;
+  background: rgba(255, 252, 246, 0.88);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.legal-document h2 {
+  margin: 26px 0 8px;
+  color: var(--charcoal);
+  font-size: 1.25rem;
+}
+
+.legal-document h2:first-child {
+  margin-top: 0;
+}
+
+.legal-document p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.legal-updated {
+  margin-top: 28px !important;
+  color: var(--charcoal) !important;
+  font-weight: 900;
+}
+
 .booking-actions {
   display: flex;
   gap: 12px;
