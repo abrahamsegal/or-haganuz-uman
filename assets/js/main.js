@@ -509,13 +509,14 @@ if (bookingForm) {
   const checkout = bookingForm.querySelector("#checkout");
   const emailButton = bookingForm.querySelector("#bookingEmail");
   const roomTypeSelect = bookingForm.querySelector("#roomType");
+  const sideCalendar = document.querySelector("#bookingSideCalendar");
   const today = new Date().toISOString().slice(0, 10);
   let bookingPickerTarget = checkin;
   let bookingPickerDate = new Date();
-  const bookingPicker = document.createElement("div");
+  const bookingPicker = sideCalendar || document.createElement("div");
   bookingPicker.className = "booking-date-picker";
-  bookingPicker.hidden = true;
-  bookingForm.appendChild(bookingPicker);
+  bookingPicker.hidden = false;
+  if (!sideCalendar) bookingForm.appendChild(bookingPicker);
 
   function dateOnly(value) {
     const [year, month, day] = String(value || today).split("-").map(Number);
@@ -555,9 +556,11 @@ if (bookingForm) {
       const date = addDays(gridStart, index);
       const iso = toIsoDate(date);
       const disabled = date < minDate;
-      const selected = iso === bookingPickerTarget.value;
+      const isCheckin = iso === checkin.value;
+      const isCheckout = iso === checkout.value;
+      const inRange = checkin.value && checkout.value && iso > checkin.value && iso < checkout.value;
       const muted = date.getMonth() !== monthStart.getMonth();
-      return `<button type="button" class="${selected ? "is-selected" : ""} ${muted ? "is-muted" : ""}" data-booking-date="${iso}" ${disabled ? "disabled" : ""}>${date.getDate()}</button>`;
+      return `<button type="button" class="${isCheckin || isCheckout ? "is-selected" : ""} ${inRange ? "is-range" : ""} ${muted ? "is-muted" : ""}" data-booking-date="${iso}" ${disabled ? "disabled" : ""}>${date.getDate()}</button>`;
     }).join("");
 
     bookingPicker.innerHTML = `
@@ -565,6 +568,16 @@ if (bookingForm) {
         <button type="button" data-booking-month="-1">‹</button>
         <strong>${monthTitle}</strong>
         <button type="button" data-booking-month="1">›</button>
+      </div>
+      <div class="booking-date-range">
+        <button type="button" class="${bookingPickerTarget === checkin ? "is-active" : ""}" data-range-target="checkin">
+          <small>Entrada</small>
+          <strong>${checkin.value || "--"}</strong>
+        </button>
+        <button type="button" class="${bookingPickerTarget === checkout ? "is-active" : ""}" data-range-target="checkout">
+          <small>Salida</small>
+          <strong>${checkout.value || "--"}</strong>
+        </button>
       </div>
       <div class="booking-date-weekdays">${weekdays.map((day) => `<span>${day}</span>`).join("")}</div>
       <div class="booking-date-grid">${cells}</div>
@@ -574,9 +587,6 @@ if (bookingForm) {
   function openBookingPicker(input) {
     bookingPickerTarget = input;
     bookingPickerDate = input.value ? dateOnly(input.value) : new Date();
-    const field = input.closest(".booking-field");
-    field.after(bookingPicker);
-    bookingPicker.hidden = false;
     renderBookingPicker();
   }
 
@@ -592,20 +602,24 @@ if (bookingForm) {
       renderBookingPicker();
       return;
     }
+    const rangeButton = event.target.closest("[data-range-target]");
+    if (rangeButton) {
+      bookingPickerTarget = rangeButton.dataset.rangeTarget === "checkout" ? checkout : checkin;
+      renderBookingPicker();
+      return;
+    }
     const dateButton = event.target.closest("[data-booking-date]");
     if (!dateButton || dateButton.disabled) return;
     bookingPickerTarget.value = dateButton.dataset.bookingDate;
     if (bookingPickerTarget === checkin && (!checkout.value || checkout.value <= checkin.value)) {
       checkout.value = toIsoDate(addDays(dateOnly(checkin.value), 1));
+      bookingPickerTarget = checkout;
+    } else if (bookingPickerTarget === checkout) {
+      bookingPickerTarget = checkin;
     }
-    bookingPicker.hidden = true;
+    renderBookingPicker();
   });
-
-  document.addEventListener("click", (event) => {
-    if (bookingPicker.hidden) return;
-    if (bookingPicker.contains(event.target) || event.target === checkin || event.target === checkout) return;
-    bookingPicker.hidden = true;
-  });
+  renderBookingPicker();
 
   async function loadBookingCatalog() {
     if (!roomTypeSelect) return;

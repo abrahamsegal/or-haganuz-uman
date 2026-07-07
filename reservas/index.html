@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reservas | Hotel Or Haganuz Uman</title>
     <meta name="description" content="Consulta disponibilidad y reservas para Hotel Or Haganuz Uman.">
-    <link rel="stylesheet" href="../assets/css/styles.css?v=27">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=28">
   </head>
   <body>
     <header class="site-header">
@@ -53,11 +53,11 @@
               <label for="guestEmail" data-i18n="booking.guestEmail">Email opcional</label>
               <input id="guestEmail" name="guestEmail" type="email" autocomplete="email">
             </div>
-            <div class="booking-field">
+            <div class="booking-field booking-date-field">
               <label for="checkin" data-i18n="booking.checkin">Entrada</label>
               <input id="checkin" name="checkin" type="text" inputmode="none" autocomplete="off" required readonly>
             </div>
-            <div class="booking-field">
+            <div class="booking-field booking-date-field">
               <label for="checkout" data-i18n="booking.checkout">Salida</label>
               <input id="checkout" name="checkout" type="text" inputmode="none" autocomplete="off" required readonly>
             </div>
@@ -97,6 +97,7 @@
           <aside class="booking-summary">
             <h2 data-i18n="booking.summaryTitle">Reserva directa</h2>
             <p data-i18n="booking.summaryCopy">Este formulario no cobra ni confirma automáticamente. Envía una solicitud clara al hotel para confirmar disponibilidad y precio.</p>
+            <div class="booking-side-calendar" id="bookingSideCalendar"></div>
             <ul>
               <li data-i18n="booking.point1">Respuesta directa por WhatsApp</li>
               <li data-i18n="booking.point2">Ideal para familias y grupos</li>
@@ -108,6 +109,6 @@
     </main>
 
     <a class="floating-whatsapp" href="https://wa.me/972538293228" target="_blank" rel="noopener" aria-label="WhatsApp"></a>
-    <script src="../assets/js/main.js?v=27"></script>
+    <script src="../assets/js/main.js?v=28"></script>
   </body>
 </html>
