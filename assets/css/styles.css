@@ -2381,11 +2381,6 @@ body:not(.admin-page) .nav {
 body:not(.admin-page) .brand {
   display: inline-flex;
   align-items: center;
-  background: #f1ece5;
-}
-
-body:not(.admin-page) .brand img {
-  mix-blend-mode: multiply;
 }
 
 body:not(.admin-page) .nav-links {
