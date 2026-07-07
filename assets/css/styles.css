@@ -1689,6 +1689,7 @@ p {
   gap: 8px;
   margin-bottom: 10px;
   color: var(--charcoal);
+  direction: ltr;
   text-align: center;
 }
 

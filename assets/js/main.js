@@ -620,6 +620,11 @@ if (bookingForm) {
     updateDateTrigger();
   }
 
+  function shiftBookingMonth(delta) {
+    bookingPickerDate = new Date(bookingPickerDate.getFullYear(), bookingPickerDate.getMonth() + delta, 1);
+    renderBookingPicker();
+  }
+
   function openBookingPicker(input = bookingPickerTarget) {
     bookingPickerTarget = input;
     bookingPickerDate = input.value ? dateOnly(input.value) : new Date();
@@ -654,8 +659,7 @@ if (bookingForm) {
     }
     const monthButton = event.target.closest("[data-booking-month]");
     if (monthButton) {
-      bookingPickerDate.setMonth(bookingPickerDate.getMonth() + Number(monthButton.dataset.bookingMonth));
-      renderBookingPicker();
+      shiftBookingMonth(Number(monthButton.dataset.bookingMonth));
       return;
     }
     const rangeButton = event.target.closest("[data-range-target]");
@@ -675,6 +679,14 @@ if (bookingForm) {
       closeBookingPicker();
     }
     renderBookingPicker();
+  });
+
+  bookingPicker.addEventListener("pointerdown", (event) => {
+    const monthButton = event.target.closest("[data-booking-month]");
+    if (!monthButton) return;
+    event.preventDefault();
+    event.stopPropagation();
+    shiftBookingMonth(Number(monthButton.dataset.bookingMonth));
   });
 
   document.addEventListener("click", (event) => {
