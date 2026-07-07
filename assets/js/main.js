@@ -544,6 +544,21 @@ if (bookingForm) {
     return "es-ES";
   }
 
+  function hebrewDayNumber(number) {
+    const units = ["", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט"];
+    const tens = ["", "י", "כ", "ל"];
+    if (number === 15) return "טו";
+    if (number === 16) return "טז";
+    return `${tens[Math.floor(number / 10)] || ""}${units[number % 10] || ""}`;
+  }
+
+  function hebrewDateLabel(date) {
+    const parts = new Intl.DateTimeFormat("he-IL-u-ca-hebrew", { day: "numeric", month: "long" }).formatToParts(date);
+    const day = Number(parts.find((part) => part.type === "day")?.value || 0);
+    const month = parts.find((part) => part.type === "month")?.value || "";
+    return `${hebrewDayNumber(day)} ${month}`.trim();
+  }
+
   function formatShortDate(value) {
     if (!value) {
       const lang = localStorage.getItem("orHaganuzLang") || "he";
@@ -576,7 +591,10 @@ if (bookingForm) {
       const isCheckout = iso === checkout.value;
       const inRange = checkin.value && checkout.value && iso > checkin.value && iso < checkout.value;
       const muted = date.getMonth() !== monthStart.getMonth();
-      return `<button type="button" class="${isCheckin || isCheckout ? "is-selected" : ""} ${inRange ? "is-range" : ""} ${muted ? "is-muted" : ""}" data-booking-date="${iso}" ${disabled ? "disabled" : ""}>${date.getDate()}</button>`;
+      return `<button type="button" class="${isCheckin || isCheckout ? "is-selected" : ""} ${inRange ? "is-range" : ""} ${muted ? "is-muted" : ""}" data-booking-date="${iso}" ${disabled ? "disabled" : ""}>
+        <span>${date.getDate()}</span>
+        <small>${hebrewDateLabel(date)}</small>
+      </button>`;
     }).join("");
 
     bookingPicker.innerHTML = `

@@ -1762,6 +1762,10 @@ p {
 .booking-date-grid button {
   aspect-ratio: 1;
   min-height: 28px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1px;
   color: var(--charcoal);
   background: #f8f2e9;
   border: 1px solid transparent;
@@ -1769,6 +1773,19 @@ p {
   font: inherit;
   font-weight: 900;
   cursor: pointer;
+}
+
+.booking-date-grid button span {
+  line-height: 1;
+}
+
+.booking-date-grid button small {
+  max-width: 100%;
+  color: inherit;
+  font-size: 0.48rem;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.72;
 }
 
 .booking-date-done {
@@ -5233,6 +5250,67 @@ body:not(.admin-page) .booking-hero p {
   border-radius: 4px;
   font-size: 0.66rem;
   font-weight: 760;
+}
+
+.admin-platform .date-picker-day {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1px;
+}
+
+.admin-platform .date-picker-day span {
+  line-height: 1;
+}
+
+.admin-platform .date-picker-day small {
+  max-width: 100%;
+  color: inherit;
+  font-size: 0.48rem;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.68;
+}
+
+.admin-platform .calendar-day-head strong {
+  display: grid;
+  gap: 1px;
+}
+
+.admin-platform .calendar-day-head strong span {
+  color: inherit;
+  font-size: 0.92rem;
+  line-height: 1;
+}
+
+.admin-platform .calendar-day-head strong small {
+  color: #8f744d;
+  font-size: 0.58rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.admin-platform .timeline-day-head {
+  gap: 2px;
+  text-transform: none;
+}
+
+.admin-platform .timeline-day-head span {
+  font-weight: 850;
+}
+
+.admin-platform .timeline-day-head small,
+.admin-platform .timeline-cell small {
+  color: #9a7b4f;
+  font-size: 0.56rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.admin-platform .timeline-cell {
+  display: grid;
+  align-content: start;
+  gap: 4px;
 }
 
 .admin-platform .timeline-booking {

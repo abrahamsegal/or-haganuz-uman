@@ -1333,6 +1333,21 @@ function addDays(date, days) {
   return copy;
 }
 
+function hebrewDayNumber(number) {
+  const units = ["", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט"];
+  const tens = ["", "י", "כ", "ל"];
+  if (number === 15) return "טו";
+  if (number === 16) return "טז";
+  return `${tens[Math.floor(number / 10)] || ""}${units[number % 10] || ""}`;
+}
+
+function hebrewDateLabel(date) {
+  const parts = new Intl.DateTimeFormat("he-IL-u-ca-hebrew", { day: "numeric", month: "long" }).formatToParts(dateOnly(date));
+  const day = Number(parts.find((part) => part.type === "day")?.value || 0);
+  const month = parts.find((part) => part.type === "month")?.value || "";
+  return `${hebrewDayNumber(day)} ${month}`.trim();
+}
+
 function openDatePicker(field) {
   activeDateField = field;
   const input = field === "checkout" ? adminCheckoutInput : adminCheckinInput;
@@ -1375,7 +1390,8 @@ function renderDatePicker() {
         isEnd ? "is-end" : "",
         inRange ? "is-range" : "",
       ].filter(Boolean).join(" ")}" data-picker-date="${iso}">
-        ${cellDate.getDate()}
+        <span>${cellDate.getDate()}</span>
+        <small>${hebrewDateLabel(cellDate)}</small>
       </button>
     `);
   }
@@ -1613,7 +1629,7 @@ function renderCalendar() {
     cells.push(`
       <div class="${classes}">
         <div class="calendar-day-head">
-          <strong>${cellDate.getDate()}</strong>
+          <strong><span>${cellDate.getDate()}</span><small>${hebrewDateLabel(cellDate)}</small></strong>
           <span>${available} ${dict.available}</span>
         </div>
         <div class="calendar-day-flags">
@@ -1653,7 +1669,7 @@ function renderWeekCalendar(dict) {
   const dayCells = Array.from({ length: 7 }, (_, index) => {
     const date = addDays(weekStart, index);
     const label = new Intl.DateTimeFormat(dict.locale, { weekday: "short", day: "2-digit" }).format(date);
-    return { date, iso: toIsoDate(date), label };
+    return { date, iso: toIsoDate(date), label, hebrew: hebrewDateLabel(date) };
   });
 
   renderCalendarText(dict);
@@ -1666,7 +1682,8 @@ function renderWeekCalendar(dict) {
       <div class="timeline-room-label">${escapeHtml(text("room"))}</div>
       ${dayCells.map((day, index) => `
         <div class="timeline-day-head ${day.iso === todayString() ? "is-today" : ""}" style="grid-column:${index + 2}">
-          ${escapeHtml(day.label)}
+          <span>${escapeHtml(day.label)}</span>
+          <small>${escapeHtml(day.hebrew)}</small>
         </div>
       `).join("")}
     </section>
@@ -1690,6 +1707,7 @@ function renderWeekCalendar(dict) {
           return `
             <button class="timeline-cell ${day.iso === todayString() ? "is-today" : ""}" type="button" data-action="new-date" data-date="${day.iso}" style="grid-column:${index + 2}">
               ${available !== "" ? `<span>${available}</span>` : ""}
+              <small>${escapeHtml(day.hebrew)}</small>
             </button>
           `;
         }).join("")}
