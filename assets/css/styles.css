@@ -1822,6 +1822,77 @@ p {
   cursor: not-allowed;
 }
 
+.booking-pricing {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  background: #fffaf1;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.booking-pricing h2 {
+  margin: 2px 0 0;
+  color: var(--charcoal);
+  font-size: 1.25rem;
+}
+
+.pricing-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 14px;
+}
+
+.pricing-options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.pricing-options input {
+  width: 16px;
+  height: 16px;
+  min-height: 0;
+  margin-top: 2px;
+  accent-color: var(--charcoal);
+  flex: 0 0 auto;
+}
+
+.quote-box {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  color: var(--charcoal);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.quote-box strong {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1;
+}
+
+.quote-box span,
+.quote-box em {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.quote-box ul {
+  display: grid;
+  gap: 4px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
 .booking-field textarea {
   resize: vertical;
 }
@@ -2136,6 +2207,10 @@ p {
   }
 
   .booking-widget {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-options {
     grid-template-columns: 1fr;
   }
 

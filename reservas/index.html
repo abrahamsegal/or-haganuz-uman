@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reservas | Hotel Or Haganuz Uman</title>
     <meta name="description" content="Consulta disponibilidad y reservas para Hotel Or Haganuz Uman.">
-    <link rel="stylesheet" href="../assets/css/styles.css?v=31">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=32">
   </head>
   <body>
     <header class="site-header">
@@ -70,16 +70,44 @@
               <div class="booking-date-picker" id="bookingInlineCalendar" hidden></div>
             </div>
             <div class="booking-field">
-              <label for="guests" data-i18n="booking.guests">Huéspedes</label>
-              <input id="guests" name="guests" type="number" min="1" max="30" value="2" required>
+              <label for="guests" data-i18n="booking.adults">Adultos</label>
+              <input id="guests" name="guests" type="number" min="1" max="96" value="2" required>
             </div>
             <div class="booking-field">
-              <label for="roomType" data-i18n="booking.roomType">Tipo de habitación</label>
-              <select id="roomType" name="roomType">
-                <option value="Habitación individual" data-i18n="booking.single">Habitación individual</option>
-                <option value="Habitación doble" data-i18n="booking.double">Habitación doble</option>
-                <option value="Familia / grupo" data-i18n="booking.family">Familia / grupo</option>
+              <label for="children" data-i18n="booking.children">Niños</label>
+              <input id="children" name="children" type="number" min="0" max="96" value="0">
+            </div>
+            <div class="booking-field">
+              <label for="roomCount" data-i18n="booking.roomCount">Cuartos</label>
+              <input id="roomCount" name="roomCount" type="number" min="1" max="24" value="1" required>
+            </div>
+            <div class="booking-field">
+              <label for="roomType" data-i18n="booking.roomType">Ocupación por cuarto</label>
+              <select id="roomType" name="roomType" data-fixed-pricing="true">
+                <option value="single" data-i18n="booking.single">1 persona - $75/noche</option>
+                <option value="double" data-i18n="booking.double" selected>2 personas - $89/noche</option>
+                <option value="triple" data-i18n="booking.triple">3 personas - $120/noche</option>
+                <option value="quad" data-i18n="booking.quad">4 personas - $140/noche</option>
               </select>
+            </div>
+            <div class="booking-pricing booking-field--full">
+              <div>
+                <p class="eyebrow" data-i18n="booking.quoteEyebrow">Cotización</p>
+                <h2 data-i18n="booking.quoteTitle">Precio estimado</h2>
+              </div>
+              <div class="pricing-options">
+                <label><input type="checkbox" name="adultBreakfast"> <span data-i18n="booking.adultBreakfast">Desayuno adultos $25 p/p por día</span></label>
+                <label><input type="checkbox" name="adultDinner"> <span data-i18n="booking.adultDinner">Cena adultos $35 p/p por día</span></label>
+                <label><input type="checkbox" name="adultShabbat"> <span data-i18n="booking.adultShabbat">Paquete Shabat adultos $160 p/p</span></label>
+                <label><input type="checkbox" name="childParentRoom" checked> <span data-i18n="booking.childParentRoom">Niños en cuarto de padres $15 p/noche</span></label>
+                <label><input type="checkbox" name="childBreakfast"> <span data-i18n="booking.childBreakfast">Desayuno niños $12 p/p por día</span></label>
+                <label><input type="checkbox" name="childDinner"> <span data-i18n="booking.childDinner">Cena niños $18 p/p por día</span></label>
+                <label><input type="checkbox" name="childShabbat"> <span data-i18n="booking.childShabbat">Paquete Shabat niños $70 p/p</span></label>
+              </div>
+              <div class="quote-box" id="bookingQuote">
+                <strong>$0</strong>
+                <span data-i18n="booking.quoteHint">Selecciona fechas para calcular.</span>
+              </div>
             </div>
             <div class="booking-field booking-field--full">
               <label for="notes" data-i18n="booking.notes">Notas</label>
@@ -97,6 +125,7 @@
             </div>
             <div class="booking-actions booking-field--full">
               <button class="button primary booking-submit" type="submit" data-i18n="booking.submit">Reservar directo</button>
+              <button class="button secondary booking-whatsapp" id="bookingWhatsApp" type="button" data-i18n="booking.whatsappQuote">Enviar cotización por WhatsApp</button>
               <button class="button secondary booking-email" id="bookingEmail" type="button" data-i18n="booking.emailSubmit">Enviar por email</button>
             </div>
             <p class="booking-status booking-field--full" id="bookingStatus" hidden></p>
@@ -116,6 +145,6 @@
     </main>
 
     <a class="floating-whatsapp" href="https://wa.me/972538293228" target="_blank" rel="noopener" aria-label="WhatsApp"></a>
-    <script src="../assets/js/main.js?v=31"></script>
+    <script src="../assets/js/main.js?v=32"></script>
   </body>
 </html>

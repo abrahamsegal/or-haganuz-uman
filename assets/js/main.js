@@ -144,16 +144,32 @@ const translations = {
     "booking.checkin": "כניסה",
     "booking.checkout": "יציאה",
     "booking.guests": "אורחים",
-    "booking.roomType": "סוג חדר",
+    "booking.adults": "מבוגרים",
+    "booking.children": "ילדים",
+    "booking.roomCount": "חדרים",
+    "booking.roomType": "תפוסה בחדר",
     "booking.guestName": "שם",
     "booking.guestPhone": "וואטסאפ / טלפון",
     "booking.guestEmail": "אימייל אופציונלי",
-    "booking.single": "חדר יחיד",
-    "booking.double": "חדר זוגי",
+    "booking.single": "אדם אחד - $75 ללילה",
+    "booking.double": "2 אנשים - $89 ללילה",
+    "booking.triple": "3 אנשים - $120 ללילה",
+    "booking.quad": "4 אנשים - $140 ללילה",
     "booking.family": "משפחה / קבוצה",
+    "booking.quoteEyebrow": "מחירון",
+    "booking.quoteTitle": "מחיר משוער",
+    "booking.adultBreakfast": "ארוחת בוקר מבוגרים $25 לאדם ליום",
+    "booking.adultDinner": "ארוחת ערב מבוגרים $35 לאדם ליום",
+    "booking.adultShabbat": "חבילת שבת מבוגרים $160 לאדם",
+    "booking.childParentRoom": "ילדים בחדר הורים $15 לילד ללילה",
+    "booking.childBreakfast": "ארוחת בוקר ילדים $12 לילד ליום",
+    "booking.childDinner": "ארוחת ערב ילדים $18 לילד ליום",
+    "booking.childShabbat": "חבילת שבת ילדים $70 לילד",
+    "booking.quoteHint": "בחרו תאריכים לחישוב.",
     "booking.notes": "הערות",
     "booking.notesPlaceholder": "תאריכים מיוחדים, קבוצה, ארוחות וכו'",
     "booking.submit": "שליחת הזמנה",
+    "booking.whatsappQuote": "שליחת הצעת מחיר בוואטסאפ",
     "booking.emailSubmit": "שליחה באימייל",
     "booking.termsPrefix": "אני מאשר/ת את",
     "booking.termsLink": "התנאים וההגבלות",
@@ -280,16 +296,32 @@ const translations = {
     "booking.checkin": "Entrada",
     "booking.checkout": "Salida",
     "booking.guests": "Huéspedes",
-    "booking.roomType": "Tipo de habitación",
+    "booking.adults": "Adultos",
+    "booking.children": "Niños",
+    "booking.roomCount": "Cuartos",
+    "booking.roomType": "Ocupación por cuarto",
     "booking.guestName": "Nombre",
     "booking.guestPhone": "WhatsApp / telefono",
     "booking.guestEmail": "Email opcional",
-    "booking.single": "Habitación individual",
-    "booking.double": "Habitación doble",
+    "booking.single": "1 persona - $75/noche",
+    "booking.double": "2 personas - $89/noche",
+    "booking.triple": "3 personas - $120/noche",
+    "booking.quad": "4 personas - $140/noche",
     "booking.family": "Familia / grupo",
+    "booking.quoteEyebrow": "Cotización",
+    "booking.quoteTitle": "Precio estimado",
+    "booking.adultBreakfast": "Desayuno adultos $25 p/p por día",
+    "booking.adultDinner": "Cena adultos $35 p/p por día",
+    "booking.adultShabbat": "Paquete Shabat adultos $160 p/p",
+    "booking.childParentRoom": "Niños en cuarto de padres $15 p/noche",
+    "booking.childBreakfast": "Desayuno niños $12 p/p por día",
+    "booking.childDinner": "Cena niños $18 p/p por día",
+    "booking.childShabbat": "Paquete Shabat niños $70 p/p",
+    "booking.quoteHint": "Selecciona fechas para calcular.",
     "booking.notes": "Notas",
     "booking.notesPlaceholder": "Fechas especiales, grupo, comidas, etc.",
     "booking.submit": "Reservar directo",
+    "booking.whatsappQuote": "Enviar cotización por WhatsApp",
     "booking.emailSubmit": "Enviar por email",
     "booking.termsPrefix": "Acepto los",
     "booking.termsLink": "Términos y Condiciones",
@@ -416,16 +448,32 @@ const translations = {
     "booking.checkin": "Check-in",
     "booking.checkout": "Check-out",
     "booking.guests": "Guests",
-    "booking.roomType": "Room type",
+    "booking.adults": "Adults",
+    "booking.children": "Children",
+    "booking.roomCount": "Rooms",
+    "booking.roomType": "Occupancy per room",
     "booking.guestName": "Name",
     "booking.guestPhone": "WhatsApp / phone",
     "booking.guestEmail": "Optional email",
-    "booking.single": "Single room",
-    "booking.double": "Double room",
+    "booking.single": "1 guest - $75/night",
+    "booking.double": "2 guests - $89/night",
+    "booking.triple": "3 guests - $120/night",
+    "booking.quad": "4 guests - $140/night",
     "booking.family": "Family / group",
+    "booking.quoteEyebrow": "Quote",
+    "booking.quoteTitle": "Estimated price",
+    "booking.adultBreakfast": "Adult breakfast $25 p/p per day",
+    "booking.adultDinner": "Adult dinner $35 p/p per day",
+    "booking.adultShabbat": "Adult Shabbat package $160 p/p",
+    "booking.childParentRoom": "Children in parents room $15 per night",
+    "booking.childBreakfast": "Child breakfast $12 p/p per day",
+    "booking.childDinner": "Child dinner $18 p/p per day",
+    "booking.childShabbat": "Child Shabbat package $70 p/p",
+    "booking.quoteHint": "Select dates to calculate.",
     "booking.notes": "Notes",
     "booking.notesPlaceholder": "Special dates, group, meals, etc.",
     "booking.submit": "Book directly",
+    "booking.whatsappQuote": "Send quote by WhatsApp",
     "booking.emailSubmit": "Send by email",
     "booking.termsPrefix": "I accept the",
     "booking.termsLink": "Terms and Conditions",
@@ -512,12 +560,24 @@ if (bookingForm) {
   const checkin = bookingForm.querySelector("#checkin");
   const checkout = bookingForm.querySelector("#checkout");
   const emailButton = bookingForm.querySelector("#bookingEmail");
+  const whatsappQuoteButton = bookingForm.querySelector("#bookingWhatsApp");
   const roomTypeSelect = bookingForm.querySelector("#roomType");
+  const bookingQuote = bookingForm.querySelector("#bookingQuote");
   const dateTrigger = bookingForm.querySelector("#bookingDateTrigger");
   const checkinText = bookingForm.querySelector("#bookingCheckinText");
   const checkoutText = bookingForm.querySelector("#bookingCheckoutText");
   const bookingPicker = bookingForm.querySelector("#bookingInlineCalendar");
   const today = new Date().toISOString().slice(0, 10);
+  const pricing = {
+    lodging: { single: 75, double: 89, triple: 120, quad: 140 },
+    adultBreakfast: 25,
+    adultDinner: 35,
+    adultShabbat: 160,
+    childParentRoom: 15,
+    childBreakfast: 12,
+    childDinner: 18,
+    childShabbat: 70,
+  };
   let bookingPickerTarget = checkin;
   let bookingPickerDate = new Date();
 
@@ -572,6 +632,94 @@ if (bookingForm) {
     if (checkoutText) checkoutText.textContent = formatShortDate(checkout.value);
   }
 
+  function nightsCount() {
+    if (!checkin.value || !checkout.value || checkout.value <= checkin.value) return 0;
+    return Math.max(0, Math.round((dateOnly(checkout.value) - dateOnly(checkin.value)) / 86400000));
+  }
+
+  function money(amount) {
+    return `$${Number(amount || 0).toLocaleString("en-US")}`;
+  }
+
+  function roomTypeLabel(value) {
+    const labels = {
+      single: "1 persona por cuarto",
+      double: "2 personas por cuarto",
+      triple: "3 personas por cuarto",
+      quad: "4 personas por cuarto",
+    };
+    return labels[value] || value || "-";
+  }
+
+  function getQuote() {
+    const data = new FormData(bookingForm);
+    const nights = nightsCount();
+    const rooms = Math.min(24, Math.max(1, Number(data.get("roomCount") || 1)));
+    const adults = Math.max(1, Number(data.get("guests") || 1));
+    const children = Math.max(0, Number(data.get("children") || 0));
+    const plan = data.get("roomType") || "double";
+    const roomRate = pricing.lodging[plan] || pricing.lodging.double;
+    const lines = [];
+    let total = 0;
+
+    const lodging = nights * rooms * roomRate;
+    if (lodging) {
+      total += lodging;
+      lines.push(`Hospedaje: ${rooms} cuarto(s) x ${nights} noche(s) x ${money(roomRate)} = ${money(lodging)}`);
+    }
+    if (children && data.get("childParentRoom") === "on" && nights) {
+      const amount = children * nights * pricing.childParentRoom;
+      total += amount;
+      lines.push(`Niños en cuarto de padres: ${children} x ${nights} x ${money(pricing.childParentRoom)} = ${money(amount)}`);
+    }
+    if (data.get("adultBreakfast") === "on" && nights) {
+      const amount = adults * nights * pricing.adultBreakfast;
+      total += amount;
+      lines.push(`Desayuno adultos: ${adults} x ${nights} x ${money(pricing.adultBreakfast)} = ${money(amount)}`);
+    }
+    if (data.get("adultDinner") === "on" && nights) {
+      const amount = adults * nights * pricing.adultDinner;
+      total += amount;
+      lines.push(`Cena adultos: ${adults} x ${nights} x ${money(pricing.adultDinner)} = ${money(amount)}`);
+    }
+    if (data.get("adultShabbat") === "on") {
+      const amount = adults * pricing.adultShabbat;
+      total += amount;
+      lines.push(`Paquete Shabat adultos: ${adults} x ${money(pricing.adultShabbat)} = ${money(amount)}`);
+    }
+    if (children && data.get("childBreakfast") === "on" && nights) {
+      const amount = children * nights * pricing.childBreakfast;
+      total += amount;
+      lines.push(`Desayuno niños: ${children} x ${nights} x ${money(pricing.childBreakfast)} = ${money(amount)}`);
+    }
+    if (children && data.get("childDinner") === "on" && nights) {
+      const amount = children * nights * pricing.childDinner;
+      total += amount;
+      lines.push(`Cena niños: ${children} x ${nights} x ${money(pricing.childDinner)} = ${money(amount)}`);
+    }
+    if (children && data.get("childShabbat") === "on") {
+      const amount = children * pricing.childShabbat;
+      total += amount;
+      lines.push(`Paquete Shabat niños: ${children} x ${money(pricing.childShabbat)} = ${money(amount)}`);
+    }
+
+    return { total, nights, rooms, adults, children, plan, roomRate, lines };
+  }
+
+  function updateQuote() {
+    if (!bookingQuote) return;
+    const quote = getQuote();
+    const hint = quote.nights
+      ? `${quote.rooms} cuarto(s), ${quote.adults} adulto(s), ${quote.children} niño(s). ${roomTypeLabel(quote.plan)}.`
+      : "Selecciona fechas para calcular.";
+    bookingQuote.innerHTML = `
+      <strong>${money(quote.total)}</strong>
+      <span>${hint}</span>
+      ${quote.lines.length ? `<ul>${quote.lines.map((line) => `<li>${line}</li>`).join("")}</ul>` : ""}
+      <em>Estimado sujeto a disponibilidad y confirmación del hotel.</em>
+    `;
+  }
+
   function renderBookingPicker() {
     const locale = calendarLocale();
     const monthStart = new Date(bookingPickerDate.getFullYear(), bookingPickerDate.getMonth(), 1);
@@ -618,6 +766,7 @@ if (bookingForm) {
       <button class="booking-date-done" type="button" data-booking-done>Listo</button>
     `;
     updateDateTrigger();
+    updateQuote();
   }
 
   function shiftBookingMonth(delta) {
@@ -698,11 +847,13 @@ if (bookingForm) {
   window.refreshBookingCalendar = () => {
     updateDateTrigger();
     if (!bookingPicker.hidden) renderBookingPicker();
+    updateQuote();
   };
   updateDateTrigger();
+  updateQuote();
 
   async function loadBookingCatalog() {
-    if (!roomTypeSelect) return;
+    if (!roomTypeSelect || roomTypeSelect.dataset.fixedPricing === "true") return;
     try {
       const response = await fetch("/api/hotel-settings");
       if (!response.ok) return;
@@ -719,6 +870,7 @@ if (bookingForm) {
 
   function buildBookingMessage() {
     const data = new FormData(bookingForm);
+    const quote = getQuote();
     return [
       "Hola, quiero consultar disponibilidad en Hotel Or Haganuz Uman.",
       `Nombre: ${data.get("guestName")}`,
@@ -726,8 +878,13 @@ if (bookingForm) {
       `Email: ${data.get("guestEmail") || "-"}`,
       `Entrada: ${data.get("checkin")}`,
       `Salida: ${data.get("checkout")}`,
-      `Huéspedes: ${data.get("guests")}`,
-      `Tipo: ${data.get("roomType")}`,
+      `Noches: ${quote.nights}`,
+      `Cuartos: ${quote.rooms}`,
+      `Adultos: ${quote.adults}`,
+      `Niños: ${quote.children}`,
+      `Tarifa: ${roomTypeLabel(quote.plan)} (${money(quote.roomRate)} por cuarto/noche)`,
+      `Total estimado: ${money(quote.total)}`,
+      quote.lines.length ? `Detalle:\n${quote.lines.join("\n")}` : "Detalle: pendiente de fechas",
       `Notas: ${data.get("notes") || "-"}`,
       "Terminos y condiciones: aceptados"
     ].join("\n");
@@ -735,15 +892,22 @@ if (bookingForm) {
 
   function buildBookingPayload() {
     const data = new FormData(bookingForm);
+    const quote = getQuote();
     return {
       guestName: data.get("guestName"),
       guestPhone: data.get("guestPhone"),
       guestEmail: data.get("guestEmail"),
       checkin: data.get("checkin"),
       checkout: data.get("checkout"),
-      guests: data.get("guests"),
-      roomType: data.get("roomType"),
-      notes: data.get("notes"),
+      guests: quote.adults + quote.children,
+      roomType: `${quote.rooms} cuarto(s) - ${roomTypeLabel(quote.plan)}`,
+      totalAmount: quote.total,
+      currency: "USD",
+      notes: [
+        data.get("notes"),
+        `Cotización estimada: ${money(quote.total)}`,
+        ...quote.lines,
+      ].filter(Boolean).join("\n"),
       termsAccepted: data.get("termsAccept") === "on",
     };
   }
@@ -777,6 +941,7 @@ if (bookingForm) {
       showBookingStatus(dictionary["booking.saved"], "success");
       bookingForm.reset();
       updateDateTrigger();
+      updateQuote();
     } catch {
       showBookingStatus(dictionary["booking.apiError"], "error");
     }
@@ -796,6 +961,23 @@ if (bookingForm) {
       window.location.href = `mailto:orhaganuz13@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
     });
   }
+
+  if (whatsappQuoteButton) {
+    whatsappQuoteButton.addEventListener("click", () => {
+      if (!checkin.value || !checkout.value) {
+        const dictionary = translations[localStorage.getItem("orHaganuzLang") || "he"] || translations.he;
+        openBookingPicker(!checkin.value ? checkin : checkout);
+        showBookingStatus(dictionary["booking.dateRequired"], "error");
+        return;
+      }
+      if (!bookingForm.reportValidity()) return;
+      const message = buildBookingMessage();
+      window.open(`https://wa.me/972538293228?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+    });
+  }
+
+  bookingForm.addEventListener("input", updateQuote);
+  bookingForm.addEventListener("change", updateQuote);
 }
 
 setLanguage(localStorage.getItem("orHaganuzLang") || "he");

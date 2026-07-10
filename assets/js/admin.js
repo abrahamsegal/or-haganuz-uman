@@ -612,14 +612,12 @@ const adminTexts = {
 
 const defaultHotelSettings = {
   rooms: [
-    { id: "single-room", name: "Habitacion individual", capacity: 1, count: 4, price: "", active: true, description: "Habitacion comoda para una persona." },
-    { id: "double-room", name: "Habitacion doble", capacity: 2, count: 12, price: "", active: true, description: "Habitacion para pareja o dos huespedes." },
-    { id: "family-suite", name: "Suite familiar", capacity: 5, count: 4, price: "", active: true, description: "Opcion amplia para familias." },
-    { id: "group-room", name: "Familia / grupo", capacity: 8, count: 3, price: "", active: true, description: "Coordinacion para familias grandes o grupos." },
+    { id: "standard-room", name: "Cuarto estandar", capacity: 4, count: 24, price: "1 persona $75 / 2 personas $89 / 3 personas $120 / 4 personas $140 por noche", active: true, description: "24 cuartos iguales. El precio cambia por ocupacion del cuarto." },
   ],
   meals: [
-    { id: "kosher-breakfast", name: "Desayuno kosher", type: "Desayuno", price: "", active: true, description: "Desayuno kosher sujeto a disponibilidad y coordinacion previa." },
-    { id: "shabbat-meals", name: "Comidas de Shabat", type: "Shabat", price: "", active: true, description: "Comidas para Shabat y grupos, bajo reserva." },
+    { id: "kosher-breakfast", name: "Desayuno kosher", type: "Desayuno", price: "Adulto $25 / niño $12", active: true, description: "Desayuno kosher sujeto a disponibilidad y coordinacion previa." },
+    { id: "kosher-dinner", name: "Cena kosher", type: "Cena", price: "Adulto $35 / niño $18", active: true, description: "Cena kosher bajo reserva." },
+    { id: "shabbat-meals", name: "Comidas de Shabat", type: "Shabat", price: "Adulto $160 / niño $70", active: true, description: "Paquete de comidas de Shabat bajo reserva." },
   ],
   services: [
     { id: "mikve", name: "Mikve", category: "Servicio", price: "", active: true, description: "Mikve dentro del hotel." },
