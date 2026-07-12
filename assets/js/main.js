@@ -74,7 +74,7 @@ const translations = {
     "contact.eyebrow": "הזמנות",
     "contact.title": "צור קשר להזמנה או בדיקת זמינות",
     "contact.copy": "ניתן לפנות ישירות בוואטסאפ, בטלפון או באימייל",
-    "contact.phone": "טלפון: +972 53 829 3228",
+    "contact.phone": "טלפון: +972 58 640 4027",
     "contact.phoneLabel": "\u05d8\u05dc\u05e4\u05d5\u05df:",
     "direct.eyebrow": "שירות אישי",
     "direct.title": "הזמנות ופרטים נוספים",
@@ -226,7 +226,7 @@ const translations = {
     "contact.eyebrow": "Reservas",
     "contact.title": "Consulta disponibilidad o reserva.",
     "contact.copy": "Puedes escribir directamente por WhatsApp, llamar o enviar email.",
-    "contact.phone": "Teléfono: +972 53 829 3228",
+    "contact.phone": "Teléfono: +972 58 640 4027",
     "contact.phoneLabel": "Tel\u00e9fono:",
     "direct.eyebrow": "Atención personal",
     "direct.title": "Reservas e información",
@@ -378,7 +378,7 @@ const translations = {
     "contact.eyebrow": "Bookings",
     "contact.title": "Check availability or book.",
     "contact.copy": "You can contact us directly by WhatsApp, phone or email.",
-    "contact.phone": "Phone: +972 53 829 3228",
+    "contact.phone": "Phone: +972 58 640 4027",
     "contact.phoneLabel": "Phone:",
     "direct.eyebrow": "Personal service",
     "direct.title": "Bookings and information",
@@ -972,7 +972,7 @@ if (bookingForm) {
       }
       if (!bookingForm.reportValidity()) return;
       const message = buildBookingMessage();
-      window.open(`https://wa.me/972538293228?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+      window.open(`https://wa.me/972586404027?text=${encodeURIComponent(message)}`, "_blank", "noopener");
     });
   }
 

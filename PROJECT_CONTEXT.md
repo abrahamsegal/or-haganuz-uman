@@ -50,7 +50,7 @@ Migrar `orhaganuzuman.com` a un sitio editable con Codex y publicable en Vercel,
 - No borrar ni modificar sitio actual en Hostinger.
 - No usar accesos sensibles todavia.
 - No cambiar DNS todavia.
-- No eliminar informacion publica actual: WhatsApp `+972538293228`, email `orhaganuz13@gmail.com`, ubicacion `Bilansky 2, Uman`.
+- No eliminar informacion publica actual: WhatsApp `+972586404027`, email `orhaganuz13@gmail.com`, ubicacion `Bilansky 2, Uman`.
 - No exponer contrasenas, tokens ni claves de Supabase en archivos publicos.
 
 ## Proximo paso
