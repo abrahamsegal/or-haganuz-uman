@@ -9,6 +9,7 @@ const apiRoutes = {
   "/api/logout": require("./api/logout"),
   "/api/session": require("./api/session"),
   "/api/reservations": require("./api/reservations"),
+  "/api/quote-bot": require("./api/quote-bot"),
   "/api/admin-users": require("./api/admin-users"),
   "/api/hotel-settings": require("./api/hotel-settings"),
 };

@@ -73,7 +73,7 @@ const translations = {
     "location.maps": "פתיחה במפות Google",
     "contact.eyebrow": "הזמנות",
     "contact.title": "צור קשר להזמנה או בדיקת זמינות",
-    "contact.copy": "ניתן לפנות ישירות בוואטסאפ, בטלפון או באימייל",
+    "contact.copy": "ניתן לפנות ישירות בוואטסאפ או בטלפון",
     "contact.phone": "טלפון: +972 58 640 4027",
     "contact.phoneLabel": "\u05d8\u05dc\u05e4\u05d5\u05df:",
     "direct.eyebrow": "שירות אישי",
@@ -81,8 +81,6 @@ const translations = {
     "direct.copy": "בחרו את הדרך הנוחה לכם ליצירת קשר עם צוות המלון",
     "method.whatsapp.title": "WhatsApp",
     "method.whatsapp.copy": "מענה מהיר להזמנות וזמינות",
-    "method.email.title": "Email",
-    "method.email.copy": "שליחת בקשה מסודרת",
     "method.instagram.copy": "עדכונים ותמונות מהמלון",
     "method.facebook.copy": "עמוד המלון ברשת",
     "gallery.hero.eyebrow": "גלריא",
@@ -111,7 +109,7 @@ const translations = {
     "contactPage.copy": "להזמנה, זמינות או שאלות על אירוח באומן",
     "contactPage.direct": "פנייה ישירה ומהירה",
     "contactPage.boxTitle": "פרטי התקשרות",
-    "contactPage.boxCopy": "להזמנה או בדיקת זמינות ניתן לפנות בוואטסאפ או באימייל",
+    "contactPage.boxCopy": "להזמנה או בדיקת זמינות ניתן לפנות בוואטסאפ",
     "caption.room.double": "חדר זוגי מרווח",
     "caption.room.bright": "חדר שקט ומואר",
     "caption.room.linens": "מצעים נקיים",
@@ -150,7 +148,6 @@ const translations = {
     "booking.roomType": "תפוסה בחדר",
     "booking.guestName": "שם",
     "booking.guestPhone": "וואטסאפ / טלפון",
-    "booking.guestEmail": "אימייל אופציונלי",
     "booking.single": "אדם אחד - $75 ללילה",
     "booking.double": "2 אנשים - $89 ללילה",
     "booking.triple": "3 אנשים - $120 ללילה",
@@ -170,7 +167,6 @@ const translations = {
     "booking.notesPlaceholder": "תאריכים מיוחדים, קבוצה, ארוחות וכו'",
     "booking.submit": "שליחת הזמנה",
     "booking.whatsappQuote": "שליחת הצעת מחיר בוואטסאפ",
-    "booking.emailSubmit": "שליחה באימייל",
     "booking.termsPrefix": "אני מאשר/ת את",
     "booking.termsLink": "התנאים וההגבלות",
     "booking.termsSuffix": ".",
@@ -182,7 +178,7 @@ const translations = {
     "booking.point2": "מתאים למשפחות וקבוצות",
     "booking.point3": "מיקום: Bilansky 2, Uman",
     "booking.saved": "הבקשה נרשמה. נחזור אליך לאישור סופי.",
-    "booking.apiError": "לא ניתן לשמור כרגע במערכת. אפשר לשלוח בוואטסאפ או באימייל.",
+    "booking.apiError": "לא ניתן לשמור כרגע במערכת. אפשר לשלוח בוואטסאפ.",
   },
   es: {
     "nav.home": "Inicio",
@@ -225,7 +221,7 @@ const translations = {
     "location.maps": "Abrir en Google Maps",
     "contact.eyebrow": "Reservas",
     "contact.title": "Consulta disponibilidad o reserva.",
-    "contact.copy": "Puedes escribir directamente por WhatsApp, llamar o enviar email.",
+    "contact.copy": "Puedes escribir directamente por WhatsApp o llamar.",
     "contact.phone": "Teléfono: +972 58 640 4027",
     "contact.phoneLabel": "Tel\u00e9fono:",
     "direct.eyebrow": "Atención personal",
@@ -233,8 +229,6 @@ const translations = {
     "direct.copy": "Elige el canal que prefieras para hablar con el equipo del hotel.",
     "method.whatsapp.title": "WhatsApp",
     "method.whatsapp.copy": "Respuesta rápida para disponibilidad y reservas",
-    "method.email.title": "Email",
-    "method.email.copy": "Envía una solicitud detallada",
     "method.instagram.copy": "Fotos y novedades del hotel",
     "method.facebook.copy": "Página oficial del hotel",
     "gallery.hero.eyebrow": "Galería",
@@ -263,7 +257,7 @@ const translations = {
     "contactPage.copy": "Para reservas, disponibilidad o preguntas sobre hospedaje en Uman.",
     "contactPage.direct": "Contacto rápido y directo",
     "contactPage.boxTitle": "Contacto en español",
-    "contactPage.boxCopy": "Para reservar o consultar disponibilidad, escribe por WhatsApp o email.",
+    "contactPage.boxCopy": "Para reservar o consultar disponibilidad, escribe por WhatsApp.",
     "caption.room.double": "Habitación doble amplia",
     "caption.room.bright": "Habitación tranquila y luminosa",
     "caption.room.linens": "Ropa de cama limpia",
@@ -302,7 +296,6 @@ const translations = {
     "booking.roomType": "Ocupación por cuarto",
     "booking.guestName": "Nombre",
     "booking.guestPhone": "WhatsApp / telefono",
-    "booking.guestEmail": "Email opcional",
     "booking.single": "1 persona - $75/noche",
     "booking.double": "2 personas - $89/noche",
     "booking.triple": "3 personas - $120/noche",
@@ -322,7 +315,6 @@ const translations = {
     "booking.notesPlaceholder": "Fechas especiales, grupo, comidas, etc.",
     "booking.submit": "Reservar directo",
     "booking.whatsappQuote": "Enviar cotización por WhatsApp",
-    "booking.emailSubmit": "Enviar por email",
     "booking.termsPrefix": "Acepto los",
     "booking.termsLink": "Términos y Condiciones",
     "booking.termsSuffix": ".",
@@ -334,7 +326,7 @@ const translations = {
     "booking.point2": "Ideal para familias y grupos",
     "booking.point3": "Ubicación: Bilansky 2, Uman",
     "booking.saved": "Solicitud registrada. Te contactaremos para la confirmacion final.",
-    "booking.apiError": "No se pudo guardar en el sistema ahora. Puedes enviar la solicitud por WhatsApp o email.",
+    "booking.apiError": "No se pudo guardar en el sistema ahora. Puedes enviar la solicitud por WhatsApp.",
   },
   en: {
     "nav.home": "Home",
@@ -377,7 +369,7 @@ const translations = {
     "location.maps": "Open in Google Maps",
     "contact.eyebrow": "Bookings",
     "contact.title": "Check availability or book.",
-    "contact.copy": "You can contact us directly by WhatsApp, phone or email.",
+    "contact.copy": "You can contact us directly by WhatsApp or phone.",
     "contact.phone": "Phone: +972 58 640 4027",
     "contact.phoneLabel": "Phone:",
     "direct.eyebrow": "Personal service",
@@ -385,8 +377,6 @@ const translations = {
     "direct.copy": "Choose the channel you prefer to speak with the hotel team.",
     "method.whatsapp.title": "WhatsApp",
     "method.whatsapp.copy": "Fast replies for availability and reservations",
-    "method.email.title": "Email",
-    "method.email.copy": "Send a detailed request",
     "method.instagram.copy": "Hotel photos and updates",
     "method.facebook.copy": "Official hotel page",
     "gallery.hero.eyebrow": "Gallery",
@@ -415,7 +405,7 @@ const translations = {
     "contactPage.copy": "For bookings, availability or questions about staying in Uman.",
     "contactPage.direct": "Fast direct contact",
     "contactPage.boxTitle": "Contact details",
-    "contactPage.boxCopy": "For reservations or availability, contact us by WhatsApp or email.",
+    "contactPage.boxCopy": "For reservations or availability, contact us by WhatsApp.",
     "caption.room.double": "Spacious double room",
     "caption.room.bright": "Quiet bright room",
     "caption.room.linens": "Clean linens",
@@ -454,7 +444,6 @@ const translations = {
     "booking.roomType": "Occupancy per room",
     "booking.guestName": "Name",
     "booking.guestPhone": "WhatsApp / phone",
-    "booking.guestEmail": "Optional email",
     "booking.single": "1 guest - $75/night",
     "booking.double": "2 guests - $89/night",
     "booking.triple": "3 guests - $120/night",
@@ -474,7 +463,6 @@ const translations = {
     "booking.notesPlaceholder": "Special dates, group, meals, etc.",
     "booking.submit": "Book directly",
     "booking.whatsappQuote": "Send quote by WhatsApp",
-    "booking.emailSubmit": "Send by email",
     "booking.termsPrefix": "I accept the",
     "booking.termsLink": "Terms and Conditions",
     "booking.termsSuffix": ".",
@@ -486,7 +474,7 @@ const translations = {
     "booking.point2": "Ideal for families and groups",
     "booking.point3": "Location: Bilansky 2, Uman",
     "booking.saved": "Request registered. We will contact you for final confirmation.",
-    "booking.apiError": "We could not save it in the system right now. You can send the request by WhatsApp or email.",
+    "booking.apiError": "We could not save it in the system right now. You can send the request by WhatsApp.",
   },
 };
 
@@ -559,7 +547,6 @@ galleryFolderButtons.forEach((button) => {
 if (bookingForm) {
   const checkin = bookingForm.querySelector("#checkin");
   const checkout = bookingForm.querySelector("#checkout");
-  const emailButton = bookingForm.querySelector("#bookingEmail");
   const whatsappQuoteButton = bookingForm.querySelector("#bookingWhatsApp");
   const roomTypeSelect = bookingForm.querySelector("#roomType");
   const bookingQuote = bookingForm.querySelector("#bookingQuote");
@@ -875,7 +862,6 @@ if (bookingForm) {
       "Hola, quiero consultar disponibilidad en Hotel Or Haganuz Uman.",
       `Nombre: ${data.get("guestName")}`,
       `WhatsApp / telefono: ${data.get("guestPhone")}`,
-      `Email: ${data.get("guestEmail") || "-"}`,
       `Entrada: ${data.get("checkin")}`,
       `Salida: ${data.get("checkout")}`,
       `Noches: ${quote.nights}`,
@@ -896,7 +882,6 @@ if (bookingForm) {
     return {
       guestName: data.get("guestName"),
       guestPhone: data.get("guestPhone"),
-      guestEmail: data.get("guestEmail"),
       checkin: data.get("checkin"),
       checkout: data.get("checkout"),
       guests: quote.adults + quote.children,
@@ -946,21 +931,6 @@ if (bookingForm) {
       showBookingStatus(dictionary["booking.apiError"], "error");
     }
   });
-
-  if (emailButton) {
-    emailButton.addEventListener("click", () => {
-      if (!checkin.value || !checkout.value) {
-        const dictionary = translations[localStorage.getItem("orHaganuzLang") || "he"] || translations.he;
-        openBookingPicker(!checkin.value ? checkin : checkout);
-        showBookingStatus(dictionary["booking.dateRequired"], "error");
-        return;
-      }
-      if (!bookingForm.reportValidity()) return;
-      const subject = "Solicitud de reserva - Hotel Or Haganuz Uman";
-      const message = buildBookingMessage();
-      window.location.href = `mailto:orhaganuz13@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-    });
-  }
 
   if (whatsappQuoteButton) {
     whatsappQuoteButton.addEventListener("click", () => {
